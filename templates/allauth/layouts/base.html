@@ -1,0 +1,152 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{% static 'images/fav2.ico' %}" type="image/x-icon">
+        <link rel="icon" href="{% static 'images/fav2.ico' %}" type="image/x-icon">
+        <!-- include the site stylesheet -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <!-- main stylesheet -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <!-- color stylesheet -->
+        <link rel="stylesheet" href="{% static 'css/colors.css' %}" id="ui-theme-color">
+        <!-- responsive css -->
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+        <title>
+            {% block head_title %}
+            {% endblock head_title %}
+        </title>
+        {% block extra_head %}
+        {% endblock extra_head %}
+    </head>
+    <body>
+        <header class="new-block main-header">
+			<div class="main-nav new-block">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="logo">
+								<a href="index.html"><img src="{% static 'images/logo.png' %}" alt="logo" class="img-responsive"></a>
+							</div>
+							<div class="location-block">
+								<p>Austrlia</p>
+								<span>+00 123 456 789</span>
+							</div>
+							<a href="#" class="nav-opener"><i class="fa fa-bars"></i></a>
+							<nav class="nav">
+								<ul class="list-unstyled">
+									<li class="drop active"><a href="#">Home</a>
+										<ul class="drop-down">
+											<li><a href="{% url 'home' %}">Home1</a></li>
+											<li><a href="{% url 'home2' %}">Home2</a></li>
+										</ul>
+									</li>
+									<li class="drop"><a href="#">Menu</a>
+										<ul class="drop-down">
+											<li><a href="{% url 'menu' %}">Menu</a></li>
+											<li><a href="{% url 'menu2' %}">Menu2</a></li>
+										</ul>
+									</li>
+									<li class="drop"><a href="#">Pages</a>
+										<ul class="drop-down">
+											<li><a href="{% url 'menu' %}">Menu</a></li>
+											<li><a href="{% url 'menu2' %}">Menu2</a></li>
+											<li><a href="{% url 'about_us' %}">About</a></li>
+											<li><a href="{% url 'blog'%}">Blog</a></li>
+											<li><a href="{% url 'blog_left'%}">Blog left</a></li>
+											<li><a href="{% url 'blog_right'%}">Blog right</a></li>
+											<li><a href="{% url 'blog_single'%}">Single blog</a></li>
+											<li><a href="{% url 'contact'%}">Contact us</a></li>
+											<li><a href="{% url 'product_single'%}">Product single</a></li>
+											<li><a href="{% url 'shopping_cart'%}">Cart page</a></li>
+										</ul>
+									</li>
+									<li><a href="#">Meals</a></li>
+									<li><a href="#">Pizza</a></li>
+									<li><a href="about_us.html">About</a></li>
+									<li class="drop"><a href="#">Blog</a>
+										<ul class="drop-down">
+											<li><a href="{% url 'blog'%}">Blog</a></li>
+											<li><a href="{% url 'blog_left'%}">Blog left</a></li>
+											<li><a href="{% url 'blog_right'%}">Blog right</a></li>
+											<li><a href="{% url 'blog_single'%}">Single blog</a></li>
+										</ul>
+									</li>
+									<li><a href="#">Location</a></li>
+									<li><a href="{% url 'contact'%}">Contact us</a></li>
+									<li><a href="{% url 'account_login'%}">Login/Signup</a></li>
+								</ul>
+							</nav>
+							<div class="nav-right-block">
+								<ul class="list-unstyled">
+									<li><a href="#"><i class="flaticon-scooter-front-view"></i><span class="nav-price">$00.00</span></a></li>
+								</ul>
+							</div><!-- nav-login -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</header> <!-- header -->
+     <section><div style="width: 100%; height: 200px;"></div><div>
+        {% block body %}
+        {% if messages %}
+            <div>
+                <strong>{% trans "Messages:" %}</strong>
+                <ul>
+                    {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div>
+            <strong>{% trans "Menu:" %}</strong>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'account_email' %}">{% trans "Change Email" %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'account_login' %}">{% trans "Sign In" %}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% block content %}
+        {% endblock content %}
+    {% endblock body %}
+    {% block extra_body %}
+    {% endblock extra_body %}
+     </div></section>
+        	<!-- include jQuery -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'js/bootstrap.min.html' %}"></script>
+    <!-- bootstrap -->
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <!-- slick slider  -->
+	<script src="{% static 'js/slick.js' %}"></script>
+	<!-- dscountdown  -->
+	<script src="{% static 'js/dscountdown.min.js' %}"></script>
+    <!-- jquery.nice-select -->
+    <script src="{% static 'js/jquery.nice-select.js' %}"></script>
+    <!-- magnific-popup -->
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <!-- Mixitup -->
+    <script src="{% static 'js/mixitup.min.js' %}"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP1lPhUhDU6MINpruPDinAzXffRlpzzFo"></script>
+	<script src="{% static 'js/map.js' %}"></script>
+    <!-- custom js -->
+    <script src="{% static 'js/custom.js' %}"></script>
+
+    </body>
+</html>
